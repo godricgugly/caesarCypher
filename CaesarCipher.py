@@ -2,14 +2,22 @@ import string
 import copy
 from random import randint
 
-alphabet = string.ascii_lowercase + string.ascii_lowercase
-text = list(input("input text: \n").lower())
-action = input("encrypt (write: e) or decipher (write: d) \n").lower()
-if action == "e":
-    shiftNum = int(input("number of  shifts \n"))%25
 
+
+alphabet = string.ascii_lowercase + string.ascii_lowercase
+text = list(input("Input text: \n").lower())
+action = input("Encrypt (write: e) or decipher (write: d) \n").lower()
+if action == "e":
+    inputNumber = False
+    while not inputNumber:
+        shiftNum = input("Number of  shifts \n")
+        try:
+            shiftNum = int(shiftNum)%25
+            inputNumber = True
+        except ValueError:
+            print ("\nType only digits, please\n")
 run = True
-while run == True:
+while run:
     if action == "e":
         for index, letter in enumerate(text):
             if letter.isalpha():
@@ -32,7 +40,7 @@ while run == True:
                     attemptText[i] = alphabet[newLetter]
             print ("Attempt: ", num)
             print ("".join(map(str, attemptText))) 
-            correct = input("does this look correct? y/n \n")
+            correct = input("Does this look correct? y/n \n")
             if correct == "y":
                 run = False
                 print("\nYour cipher was encrypted by shifting each letter", shiftNum, " times.")
@@ -40,15 +48,22 @@ while run == True:
                 print ("\nDeciphered text: ", "".join(map(str, attemptText)))
                 break
             if num == 25 and correct != "y":
-                print("your cipher seems to be gibberish!")
+                print("Your cipher seems to be gibberish!")
         run = False
     
     if action != "e" and action != "d":
-        tryAgain = input("something went wrong, try again? y/n \n")
+        tryAgain = input("Something went wrong, try again? y/n \n")
         if tryAgain == "y":
-            text = list(input("input text: \n").lower())
-            action = input("encrypt (write: e) or decipher (write: d): \n").lower()
+            text = list(input("Input text: \n").lower())
+            action = input("Encrypt (write: e) or decipher (write: d): \n").lower()
             if action == "e":
-                shiftNum = int(input("number of  shifts \n"))%25
+                inputNumber = False
+                while not inputNumber:
+                    shiftNum = input("Number of  shifts \n")
+                    try:
+                        shiftNum = int(shiftNum)%25
+                        inputNumber = True
+                    except ValueError:
+                        print ("\nType only digits, please\n")
         else:
             run = False
