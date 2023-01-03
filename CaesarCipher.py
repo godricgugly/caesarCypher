@@ -2,8 +2,6 @@ import string
 import copy
 from random import randint
 
-
-
 alphabet = string.ascii_lowercase + string.ascii_lowercase
 text = list(input("Input text: \n").lower())
 action = input("Encrypt (write: e) or decipher (write: d) \n").lower()
